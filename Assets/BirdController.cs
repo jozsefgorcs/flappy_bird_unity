@@ -17,18 +17,34 @@ public class BirdController : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     void Update()
     {
+        var inputUp = false;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began && gameManager.IsGameRunning)
+            {
+                // Halve the size of the cube.
+                inputUp = true;
+            }
+
+        }
         if (Input.GetKeyDown("space") && gameManager.IsGameRunning)
         {
-            rigidbody.AddForce(Vector2.up* force);
+            inputUp = true;
+        }
+
+        if (inputUp) {
+            rigidbody.AddForce(Vector2.up * force);
         }
     }
 
-    public void GameOver() {
+    public void GameOver()
+    {
         gameManager.GameOver();
     }
 }

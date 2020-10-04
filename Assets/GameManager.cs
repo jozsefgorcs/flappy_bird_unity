@@ -14,20 +14,15 @@ public class GameManager : MonoBehaviour
     private Image tutorialImage;
     [SerializeField]
     private Image gameOverImage;
-
+    [SerializeField]
+    private Rigidbody2D playerRigidbody2D;
 
     void Start()
     {
         tutorialImage.gameObject.SetActive(true);
-    
+        playerRigidbody2D.bodyType = RigidbodyType2D.Static;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+         
 
     internal void GameOver()
     {
@@ -39,5 +34,6 @@ public class GameManager : MonoBehaviour
         IsGameRunning = true;
         IsGameOver = false;
         tutorialImage.gameObject.SetActive(false);
+        playerRigidbody2D.bodyType = RigidbodyType2D.Dynamic;
     }
 }
