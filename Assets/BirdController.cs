@@ -43,6 +43,10 @@ public class BirdController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        transform.position += transform.right * Time.deltaTime * 1;
+    }
     public void GameOver()
     {
         gameManager.GameOver();
