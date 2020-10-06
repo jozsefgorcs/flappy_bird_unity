@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver = false;
 
     public bool IsTouching = false;
-
+    private int score = 0;
 
     [SerializeField]
     private Image tutorialImage;
     [SerializeField]
     private Image gameOverImage;
+    [SerializeField]
+    private Text scoreText;
     [SerializeField]
     private Rigidbody2D playerRigidbody2D;
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        scoreText.text = score.ToString();
     }
     internal void GameOver()
     {
@@ -59,5 +62,13 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    internal void Score()
+    {
+        if (IsGameRunning)
+        {
+            score++;
+        }
     }
 }

@@ -64,4 +64,7 @@ public class BirdController : MonoBehaviour
         gameManager.GameOver();
         animator.SetTrigger("Dead");
     }
+    public void Score() {
+        gameManager.Score();
+    }
 }
