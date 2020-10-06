@@ -8,18 +8,21 @@ public class BirdController : MonoBehaviour
     [SerializeField]
     private float force;
 
+    private Animator animator;
+
     GameManager gameManager;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
 
     }
-
+    bool fallingInPrevFrame = false;
     void Update()
     {
         var inputUp = false;
@@ -37,7 +40,16 @@ public class BirdController : MonoBehaviour
         if (inputUp)
         {
             rigidbody.AddForce(Vector2.up * force);
+            
         }
+        var isFalling = rigidbody.velocity.y < 0;
+        if (isFalling != fallingInPrevFrame)
+        {
+            animator.SetFloat("FallingSpeed", rigidbody.velocity.y);
+            animator.SetBool("StartFalling", isFalling);
+            
+        }
+        fallingInPrevFrame = isFalling;
     }
 
     private void FixedUpdate()
@@ -50,5 +62,6 @@ public class BirdController : MonoBehaviour
     public void GameOver()
     {
         gameManager.GameOver();
+        animator.SetTrigger("Dead");
     }
 }
